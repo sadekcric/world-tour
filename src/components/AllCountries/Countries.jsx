@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Country from "../Country/Country";
+import './countries.css'
 
 
 const Countries = () => {
 
   const [countries, setCountries]=useState([]);
+  const [visitedCountry, setVisitedCountry]=useState([]);
 
 
   useEffect(()=>{
@@ -14,7 +16,15 @@ const Countries = () => {
       .then(response=>response.json())
       .then(data=>setCountries(data))
 
-  },[]) 
+  },[]);
+
+
+
+  const handleClickVisitedCountry=(country)=>{
+    
+      const newVisitedCountry = [...visitedCountry, country];
+      setVisitedCountry(newVisitedCountry);
+  }
 
   
 
@@ -22,9 +32,27 @@ const Countries = () => {
     <div>
       <h3> Countries: {countries.length}</h3>
 
+
+      <div>
+        <h4>Visited Country</h4>
+        <p>Total Visit: {visitedCountry.length}</p>
+
+
+        <ul>
+          {
+            visitedCountry.map((country,index)=><li key={index}>{country.name.common}</li>)
+          }
+        </ul>
+
+
+      </div>
+
+      
+      <div className="layout">
       {
-        countries.map((country,index)=><Country country={country} index={index} key={index}/>)
+        countries.map((country,index)=><Country country={country} index={index} key={index} handleClickVisitedCountry={handleClickVisitedCountry}/>)
       }
+      </div>
     </div>
   );
 };
