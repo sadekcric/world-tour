@@ -16,7 +16,7 @@ const Country = ({country,index, handleClickVisitedCountry}) => {
     
   }
 
-
+ 
 
 
   return (

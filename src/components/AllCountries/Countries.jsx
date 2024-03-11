@@ -8,6 +8,7 @@ const Countries = () => {
 
   const [countries, setCountries]=useState([]);
   const [visitedCountry, setVisitedCountry]=useState([]);
+  const [flags, setFlag]=useState([])
 
 
   useEffect(()=>{
@@ -24,6 +25,17 @@ const Countries = () => {
     
       const newVisitedCountry = [...visitedCountry, country];
       setVisitedCountry(newVisitedCountry);
+
+
+      handleClickVisitedFlag(country.flags.png)
+  }
+
+
+
+  const handleClickVisitedFlag = (visitedFlag) =>{
+
+    const newVisitedFlag = [...flags, visitedFlag]
+    setFlag(newVisitedFlag)
   }
 
   
@@ -41,6 +53,10 @@ const Countries = () => {
         <ul>
           {
             visitedCountry.map((country,index)=><li key={index}>{country.name.common}</li>)
+            
+          }
+          {
+            flags.map((flag,index)=><li key={index}><img src={flag} alt="" /></li>)
           }
         </ul>
 
@@ -50,7 +66,7 @@ const Countries = () => {
       
       <div className="layout">
       {
-        countries.map((country,index)=><Country country={country} index={index} key={index} handleClickVisitedCountry={handleClickVisitedCountry}/>)
+        countries.map((country,index)=><Country country={country} index={index} key={index} handleClickVisitedCountry={handleClickVisitedCountry} />)
       }
       </div>
     </div>
@@ -58,3 +74,4 @@ const Countries = () => {
 };
 
 export default Countries;
+
